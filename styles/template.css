@@ -1,0 +1,21 @@
+:root {
+    --theme-color: rgb(250, 226, 89);
+    --link-color: dodgerblue;
+
+    --font-size-body: 17px;
+    --font-size-header: 20px;
+    --font-size-footer: 16px;
+
+}
+
+body {
+    min-height: 100vh; 
+    margin: 0;
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 50px; 
+}

@@ -1,0 +1,96 @@
+* {box-sizing: border-box}
+
+body {
+    background-image: url("../img/home.jpg");
+    background-size: cover; /* for IE9+, Safari 4.1+, Chrome 3.0+, Firefox 3.6+ */
+    -webkit-background-size: cover; /* for Safari 3.0 - 4.0 , Chrome 1.0 - 3.0 */
+    -moz-background-size: cover; /* optional for Firefox 3.6 */ 
+    -o-background-size: cover; /* for Opera 9.5 */
+    backdrop-filter: blur(10px);
+}
+
+
+.container {
+    padding: 16px;
+    width: 50%;
+    margin: auto;
+    font-size: var(--font-size-body);
+}
+
+h1 {
+  text-align: center; 
+}
+
+h3 {
+    color: rgb(51, 51, 51);
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+
+.question_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.question_table td {
+    border-bottom: 1px groove #f5f5f5;
+}
+
+.question_table tr:hover {
+    background: #e6e6e6;
+}
+
+.question-td {
+    color: var(--link-color);
+    cursor: pointer;
+}
+
+
+.vote-td {
+    width: 10%;
+    text-align: center;
+}
+
+  
+.heart {
+    margin-top: -20px;
+    width: 100px;
+    height: 100px;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;
+}
+
+.vote_count {
+    margin-top: -28px;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 80%;
+    }
+
+    .related {
+        width: 100%;
+        position: relative;
+        right: 0px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .container {
+        width: 90%;
+    }
+    .submitanswer {
+        width: 90%;
+    }
+}
+
+  
+  

@@ -1,0 +1,220 @@
+* {box-sizing: border-box}
+
+body {
+    background: white;
+}
+
+.container {
+    padding: 16px;
+    width: 50%;
+    margin: auto;
+    font-size: var(--font-size-body);
+}
+
+h1 {
+  text-align: center; 
+}
+
+#discussion_icon {
+    width: 50px;
+    float: right;
+    margin-top: -7px;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.question {
+    box-shadow: 0 0 1em 0 rgb(194, 194, 194);
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 99;
+    margin-bottom: 10px;
+}
+
+.related {
+    width: 22%;
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    overflow-x: hidden;
+    font-size: 15px;
+    background: rgb(255, 250, 223);
+    box-shadow: 0 0 1em 0 rgb(194, 194, 194);
+    border-radius: 10px;
+}
+
+.related h3 {
+    text-align: center;
+    color: rgb(73, 73, 73);
+}
+
+.related a {
+    text-decoration: none;
+    color: var(--link-color);
+    transition: 0.3s;
+}
+
+.related a:hover {
+    color: rgb(73, 73, 73);
+}
+
+.related li {
+    list-style-position: outside;
+    padding: 10px 0px;
+}
+
+.myanswer {
+    width: 100%;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 1px solid rgb(179, 179, 179);
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    transition: 0.1s;
+}
+
+.myanswer {
+    resize: vertical;
+    min-height: 45px;
+    overflow-y: scroll;
+}
+
+.myanswer:hover {
+
+    border-bottom: 3px solid rgb(179, 179, 179);
+}
+
+.myanswer:focus {
+    border: none;
+}
+ 
+
+
+.submitanswer {
+    background-color: var(--theme-color);
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 70%;
+    font-weight: bold;
+    opacity: 0.8;
+    font-size: var(--font-size-body);
+    border-radius: 10px;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    margin:0 auto;
+    display:block;
+}
+
+.submitanswer:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+
+.btn-sep {
+    padding: 16px 60px 16px 120px;
+}
+
+.btn-sep:before {
+    background: black;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.submitanswer:before {
+    font-family: 'FontAwesome';
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    line-height: 2.2;
+    font-size: 140%;
+    width: 60px;
+}
+
+.icon-send:before {
+    content: "\f1d8";
+}
+
+.submitanswer:hover {
+    opacity: 1;
+    width: 100%;
+    
+} 
+
+.answer_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.answer_table td {
+    border-bottom: 1px groove #f5f5f5;
+}
+.vote-td {
+    width: 10%;
+    text-align: center;
+}
+
+  
+.heart {
+    margin-top: -20px;
+    width: 100px;
+    height: 100px;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    cursor: pointer;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;
+}
+
+.heart.is-active {
+    transition-duration: 1s;
+    background-position: -2800px 0;
+}
+
+.vote_count {
+    margin-top: -28px;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 80%;
+    }
+
+    .related {
+        width: 100%;
+        position: relative;
+        right: 0px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .container {
+        width: 90%;
+    }
+    .submitanswer {
+        width: 90%;
+    }
+}
+
+  
+  
