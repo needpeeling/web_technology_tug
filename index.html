@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <link href="styles/template.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/header.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/index.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header>
+        <div class="topnav">
+            <a class="active nav_link" href="index.html">Home</a>
+            <a class="nav_link" href="new.html">Create Question</a>
+            <form action="#" method="POST">
+                <div class="search_container">
+                    <input type="text" placeholder="Search..." name="search2">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+            <div class="login-container">
+                <a href="login.html"><img id="login_icon" src="icons/login.png" alt="Login" /></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Welcome</h1>
+        <hr>
+        <table class="question_table" id ="search_table">
+            <h3>Search Result</h3>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">10</div>
+                </td>
+                <td class="question-td" onclick="window.location='question#1';">
+                    <p>This could be a searched question </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">100</div>
+                </td>
+                <td class="question-td" onclick="window.location='question#2';">
+                    <p>This could be a related very long long long long long long long long long long long gäääähn question?!</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">1</div>
+                </td>
+                <td class="question-td" onclick="window.location='question#3';">
+                    <p>This could be searched question</p>
+                </td>
+            </tr>
+        </table>
+        <table class="question_table" id ="popular_table">
+            <h3>Most popular Questions</h3>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">10</div>
+                </td>
+                <td class="question-td" onclick="window.location='question#1';">
+                    <p>This could be a popular question </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">100</div>
+                </td>
+                <td class="question-td" onclick="window.location='question#2';">
+                    <p>This could be a related very long long long long long long long long long long long gäääähn question?!</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">1</div>
+                </td>
+                <td class="question-td" onclick="window.location='question#3';">
+                    <p>This could be popular question</p>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+
+    <footer>
+        <button><a href="about.html">About</a></button>
+    </footer>
+</body>
+<script src="js/question.js"></script>
+
+</html>

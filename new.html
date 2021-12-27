@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post a question</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <link href="styles/template.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/header.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/new.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header>
+        <div class="topnav">
+            <a class="active nav_link" href="index.html">Home</a>
+            <a class="nav_link" href="new.html">Create Question</a>
+            <form action="#" method="POST">
+                <div class="search_container">
+                    <input type="text" placeholder="Search..." name="search2">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+            <div class="login-container">
+                <a href="login.html"><img id="login_icon" src="icons/login.png" alt="Login" /></a>
+            </div>
+        </div>
+    </header>
+
+    <img src="img/question_mark_1.png" class="background_question_img" id="background_question_img_1" alt="">
+    <img src="img/question_mark_2.png" class="background_question_img" id="background_question_img_2" alt="">
+    <img src="img/question_mark_3.png" class="background_question_img" id="background_question_img_3" alt="">
+    <div class="container">
+        <h1>Post a question<img  src="icons/new_question.png" id="question_icon" alt="question"></h1>
+        <hr>
+            <form action="" method="POST">
+                <div class="question">
+                    <label for="title"><b>Title</b></label>
+                    <input type="text" class="title" placeholder="Enter Title" name="title" id="title">
+                    <label for="description"><b>Description</b></label>
+                    <textarea name="description" class="description" id="description" rows="10" placeholder="Enter Description"></textarea>
+                    <button type="submit" class="submitquestion btn-sep icon-send">Submit Question</button>
+                </div>
+            </form>
+        </hr>
+    </div>
+
+    <footer>
+        <button><a href="about.html">About</a></button>
+    </footer>
+</body>
+</html>

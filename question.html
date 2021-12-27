@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discussion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <link href="styles/template.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/header.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/question.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header>
+        <div class="topnav">
+            <a class="active nav_link" href="index.html">Home</a>
+            <a class="nav_link" href="new.html">Create Question</a>
+            <form action="#" method="POST">
+                <div class="search_container">
+                    <input type="text" placeholder="Search..." name="search2">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+            <div class="login-container">
+                <a href="login.html"><img id="login_icon" src="icons/login.png" alt="Login" /></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Insert Question Title<img  src="icons/discussion.png" id="discussion_icon" alt="discussion"></h1>
+        <hr>
+        <div class="question">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, 
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </p>
+        </div>
+    
+        <form action="" method="POST">
+            <textarea name="myanswer" class="myanswer" rows="3" placeholder="Enter Answer"></textarea>
+            <button type="submit" class="submitanswer btn-sep icon-send">Submit Answer</button>
+        </form>
+
+        <table class="answer_table">
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">10</div>
+                </td>
+                <td class="answer-td">
+                    <p>This could be a related very long long long long long long long long long long long gäääähn answer?!
+                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                     </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">100</div>
+                </td>
+                <td class="answer-td">
+                    <p>This could be a related very long long long long long long long long long long long gäääähn answer?!</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="vote-td">
+                    <div class="vote">
+                        <div class="heart"></div>
+                    </div>
+                    <div class="vote_count">1</div>
+                </td>
+                <td class="answer-td">
+                    <p>This could be a related very long long long long long long long long long long long gäääähn answer?!
+                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                        This could be a related very long long long long long long long long long long long gäääähn answer?!
+                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+                        no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                     </p>
+                </td>
+            </tr>
+        </table>
+        <div class="related">
+            <h3>Related</h3>
+            <ul>
+                <li><a href="">This could be a related question?!</a></li>
+                <li><a href="">This could be a related very long long long long long long long long long long long gäääähn question?!</a></li>
+                <li><a href="">This could be a related question?!</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <footer>
+        <button><a href="about.html">About</a></button>
+    </footer>
+</body>
+<script src="js/question.js"></script>
+
+</html>
