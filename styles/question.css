@@ -11,10 +11,6 @@ body {
     font-size: var(--font-size-body);
 }
 
-h1 {
-  text-align: center; 
-}
-
 #discussion_icon {
     width: 50px;
     float: right;
@@ -94,7 +90,6 @@ hr {
 .myanswer:focus {
     border: none;
 }
- 
 
 
 .submitanswer {
@@ -161,7 +156,7 @@ hr {
     
 } 
 
-.answer_table {
+.answer_table .title_table{
     width: 100%;
     border-collapse: collapse;
 }
