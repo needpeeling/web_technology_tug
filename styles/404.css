@@ -13,3 +13,14 @@ body {
     align-items: center;
 }
 
+.pageNotFound_img {
+  width: 70%;
+}
+
+@media screen and (max-width: 1000px) {
+  .pageNotFound_img {
+    width: 95%;
+  }
+}
+
+
