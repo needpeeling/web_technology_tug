@@ -218,5 +218,8 @@ hr {
     }
 }
 
-  
-  
+@media print {
+    .related, .myanswer, .submitanswer, .vote-td {
+        display: none;
+    }
+}

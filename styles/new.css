@@ -183,7 +183,11 @@ hr {
     }
 }
 
-
+@media print {
+    .background_question_img, .submitquestion {
+        display: none;
+    }
+}
 
 
 @-webkit-keyframes move_question_1 {

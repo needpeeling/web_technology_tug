@@ -133,3 +133,9 @@
         width: 30px;
     }
 }
+
+@media print {
+    .topnav {
+        display: none;
+    }
+}

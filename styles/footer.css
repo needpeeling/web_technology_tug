@@ -26,3 +26,9 @@ footer a:hover {
     color: white;
     font-weight: bold;
 }
+
+@media print {
+    footer {
+        display: none;
+    }
+}
