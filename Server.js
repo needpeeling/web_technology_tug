@@ -9,7 +9,7 @@ const helpF      = require('./js/HelperFunctions');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use("/styles", express.static(__dirname + '/styles'));
+app.use("/", express.static(__dirname + '/'));
 
 let user_id = -1;
 let activeQuestion_id = -1;

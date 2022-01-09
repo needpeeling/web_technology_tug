@@ -15,6 +15,7 @@ module.exports = {
 }
 
 function newAnswer(text, user_id, parent_id) {
+    // -- Data Acquisation
     // Create JSON-Object which needs:
     // ID           ... ID of Answer
     let ID = findHighestMissingID();
