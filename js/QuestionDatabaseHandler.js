@@ -80,8 +80,17 @@ function findAmountAnswersWithHighestLikes(amount) {
         result_obj = result_obj.sort(function(a,b){return b-a})
 
         iterator = 0;
+        let res     = undefined;
+        let old_res = undefined;
         while(iterator < amount) {
-            result.push(findQuestionWithScore(result_obj[iterator],0));
+            old_res = res;
+            res = findQuestionWithScore(result_obj[iterator],0);
+
+            if(res.body === old_res.body) {
+                res = findQuestionWithScore(result_obj[iterator], res.id)
+            }
+
+            result.push(res);
             iterator++;
         }
         console.log(result);
