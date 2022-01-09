@@ -2,63 +2,61 @@ const filesys = require('fs');
 
 module.exports = {
     handleNewQuestion: function (questionTitle, questionDescription, user_id) {
-        console.log("New questionTerm added: Title: " + questionTitle + " ,Description: " + questionDescription);
-        // TODO: Handle a new Question
-        // This means adding a new Question to the Question-Database
+        newQuestion(questionTitle, questionDescription, user_id);
+        findAmountAnswersWithHighestLikes(4);
     }
 }
 
-function newAnswer(text, user_id, parent_id) {
+function newQuestion(title, desc, user_id) {
     // -- Data Acquisation
     // Create JSON-Object which needs:
-    // ID           ... ID of Answer
+    // ID           ... ID of Question
     let ID = findHighestMissingID();
     // OwnerUserId  ... ID of logged in User
     let ownerUserId = user_id;
     // CreationDate ... Date of Creation of Answer (Now)
     let creationDate = new Date().toISOString();
-    // ParentId     ... ID of Question this Answer refers to
-    let parentId = parent_id;
     // Score        ... Score of Answer (0 at begin)
     let score = 0;
-    // Body         ... Answer Text (text)
+    // Title        ... Question Title (title)
+    // Body         ... Question Description (desc)
 
     // -- JSON Object Building
-    const answer_body = {
+    const question_body = {
         "OwnerUserId":ownerUserId,
         "CreationDate":creationDate,
-        "ParentId":parentId,
         "Score":score,
-        "Body":text,
+        "Title":title,
+        "Body":desc
     };
-    const answer = {
-        [ID]: answer_body
+    const question = {
+        [ID]: question_body
     };
-    const answer_data = JSON.stringify(answer);
+    const question_data = JSON.stringify(question);
 
     // -- Write Data to File
-    if(filesys.existsSync('db/Answers.json')) {
-        filesys.readFile('db/Answers.json', function (err, data) {
-            var answers_json = JSON.parse(data);
-            answers_json[ID] = answer_body;
-            filesys.writeFile('db/Answers.json', JSON.stringify(answers_json), function(err){
+    if(filesys.existsSync('db/Questions.json')) {
+        filesys.readFile('db/Questions.json', function (err, data) {
+            var questions_json = JSON.parse(data);
+            questions_json[ID] = question_body;
+            filesys.writeFile('db/Questions.json', JSON.stringify(questions_json), function(err){
                 if (err) throw err;
-                console.log("[DEBUG] New Answer added: " + text);
+                console.log("[DEBUG] New Question added: " + title + " | " + desc);
             });
         })
     } else {
-        filesys.writeFile('db/Answers.json', answer_data, function(err){
+        filesys.writeFile('db/Questions.json', question_data, function(err){
             if (err) throw err;
-            console.log("[DEBUG] New Answer added: " + text);
+            console.log("[DEBUG][NF] New Question added: " + title + " | " + desc);
         });
     }
 }
 
 function findHighestMissingID() {
-    if(filesys.existsSync('db/Answers.json')) {
-        let answers_json = JSON.parse(filesys.readFileSync('db/Answers.json'));
+    if(filesys.existsSync('db/Questions.json')) {
+        let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
         let iterator = 0;
-        while(answers_json[iterator] !== undefined) {
+        while(questions_json[iterator] !== undefined) {
             iterator++;
         }
         return iterator;
@@ -67,33 +65,59 @@ function findHighestMissingID() {
     }
 }
 
-// Usage: findAmountAnswersWithParentID(2,5)
+// Usage: findAmountAnswersWithHighestLikes(10)
 // amount   = How many results you want
-// parentID = ID of Question you want the answers to
-function findAmountAnswersWithParentID(amount, parentID) {
-    if(filesys.existsSync('db/Answers.json')) {
+function findAmountAnswersWithHighestLikes(amount) {
+    if(filesys.existsSync('db/Questions.json')) {
         let result_obj = [];
-        let answers_json = JSON.parse(filesys.readFileSync('db/Answers.json'));
+        let result = [];
+        let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
         let iterator = 0;
-        while(iterator < Object.keys(answers_json).length && Object.keys(result_obj).length < amount) {
-            if(answers_json[iterator].ParentId === parentID) {
-                const answer = {
-                    [iterator]: answers_json[iterator]
-                };
-                const answer_data = JSON.stringify(answer);
-                result_obj.push(answer_data);
-            }
+        while(iterator < Object.keys(questions_json).length) {
+            result_obj.push(questions_json[iterator].Score);
             iterator++;
         }
-        return result_obj;
+        result_obj = result_obj.sort(function(a,b){return b-a})
+
+        iterator = 0;
+        while(iterator < amount) {
+            result.push(findQuestionWithScore(result_obj[iterator],0));
+            iterator++;
+        }
+        console.log(result);
+        return result;
     } else {
         return undefined;
     }
 }
 
-// Usage: findAllAnswersWithParentID(5)
-// ParentID = ID of Question
-function findAllAnswersWithParentID(parentID) {
-    findAmountAnswersWithParentID(1000,5)
+function findQuestionWithScore(score, start) {
+    if(filesys.existsSync('db/Questions.json')) {
+        let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
+        let iterator = start;
+        while(iterator < Object.keys(questions_json).length) {
+            if(questions_json[iterator].Score === score) {
+                return {[iterator]: questions_json[iterator]};
+            }
+            iterator++;
+        }
+    }
+    return undefined;
+}
+
+// Usage: findAllAnswersWithHighestLikes()
+function findAllAnswersWithHighestLikes() {
+    findAmountAnswersWithHighestLikes(1000)
+}
+
+// Usage: findAmountAnswersWithHighestW2VValue(10)
+// amount = How many results you want
+function findAmountAnswersWithHighestW2VValue() {
+    // TODO: Implement
+}
+
+// Usage: findAllAnswersWithHighestLikes()
+function findAllAnswersWithHighestW2VValue() {
+    findAmountAnswersWithHighestW2VValue(1000)
 }
 

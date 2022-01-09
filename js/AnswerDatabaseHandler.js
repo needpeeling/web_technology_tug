@@ -27,7 +27,7 @@ function newAnswer(text, user_id, parent_id) {
         "CreationDate":creationDate,
         "ParentId":parentId,
         "Score":score,
-        "Body":text,
+        "Body":text
     };
     const answer = {
         [ID]: answer_body
@@ -47,7 +47,7 @@ function newAnswer(text, user_id, parent_id) {
     } else {
         filesys.writeFile('db/Answers.json', answer_data, function(err){
             if (err) throw err;
-            console.log("[DEBUG] New Answer added: " + text);
+            console.log("[DEBUG][NF] New Answer added: " + text);
         });
     }
 }
