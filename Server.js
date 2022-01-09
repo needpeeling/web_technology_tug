@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use("/", express.static(__dirname + '/'));
 
-let user_id = -1;
 let activeQuestion_id = -1;
 
 // #####################################################################################################################
