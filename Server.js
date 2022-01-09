@@ -4,8 +4,12 @@ const port = 3000
 
 app.use("/styles", express.static(__dirname + '/styles'));
 
-app.get(['/', '/index.html'], (req, res) => {
+app.get(['/', '/index*'], (req, res) => {
     res.sendFile(__dirname + '/index.html');
+})
+
+app.post(['/', '/index*'], (req, res) => {
+    res.sendFile(__dirname + '/index.html'); // TODO: Handle Search Query
 })
 
 app.get('/about.html', (req, res) => {
@@ -20,8 +24,16 @@ app.get('/new.html', (req, res) => {
     res.sendFile(__dirname + '/new.html')
 })
 
-app.get('/question', (req, res) => {
+app.post('/new.html', (req, res) => {
+    res.sendFile(__dirname + '/new.html') // TODO: Handle new Question
+})
+
+app.get('/question*', (req, res) => {
     res.sendFile(__dirname + '/question.html')
+})
+
+app.post('/question*', (req, res) => {
+    res.sendFile(__dirname + '/question.html') // TODO: Handle new Answer
 })
 
 app.get('/*', (req, res) => {
