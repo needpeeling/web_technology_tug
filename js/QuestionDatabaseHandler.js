@@ -1,12 +1,6 @@
 const filesys = require('fs');
-let id_counter = 0;
 
 module.exports = {
-    handleNewAnswer: function (answerTerm, user_id, parent_id) {
-        newAnswer(answerTerm, user_id, parent_id);
-        // TODO: Handle a new Answer
-        // This means adding a new Answer to the Answer-Database and linking it to the Question
-    },
     handleNewQuestion: function (questionTitle, questionDescription, user_id) {
         console.log("New questionTerm added: Title: " + questionTitle + " ,Description: " + questionDescription);
         // TODO: Handle a new Question
@@ -71,5 +65,35 @@ function findHighestMissingID() {
     } else {
         return 0;
     }
+}
+
+// Usage: findAmountAnswersWithParentID(2,5)
+// amount   = How many results you want
+// parentID = ID of Question you want the answers to
+function findAmountAnswersWithParentID(amount, parentID) {
+    if(filesys.existsSync('db/Answers.json')) {
+        let result_obj = [];
+        let answers_json = JSON.parse(filesys.readFileSync('db/Answers.json'));
+        let iterator = 0;
+        while(iterator < Object.keys(answers_json).length && Object.keys(result_obj).length < amount) {
+            if(answers_json[iterator].ParentId === parentID) {
+                const answer = {
+                    [iterator]: answers_json[iterator]
+                };
+                const answer_data = JSON.stringify(answer);
+                result_obj.push(answer_data);
+            }
+            iterator++;
+        }
+        return result_obj;
+    } else {
+        return undefined;
+    }
+}
+
+// Usage: findAllAnswersWithParentID(5)
+// ParentID = ID of Question
+function findAllAnswersWithParentID(parentID) {
+    findAmountAnswersWithParentID(1000,5)
 }
 

@@ -1,5 +1,6 @@
 const sqHandler  = require('./SearchQueryHandler');
-const dbHandler = require('./DatabaseHandler');
+const aDbHandler = require('./AnswerDatabaseHandler');
+const qDbHandler = require('./QuestionDatabaseHandler');
 const lrHandler = require('./LoginRegisterHandler')
 
 let user_id = -1;
@@ -20,7 +21,7 @@ module.exports = {
         let questionTitle = req.body.title;
         let questionDescr = req.body.description;
         if(questionTitle !== undefined && questionDescr !== undefined) {
-            dbHandler.handleNewQuestion(questionTitle, questionDescr, user_id);
+            qDbHandler.handleNewQuestion(questionTitle, questionDescr, user_id);
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
@@ -31,7 +32,7 @@ module.exports = {
     handleAnswer: function (req, more, activeQuestion_id) {
         let answerTerm = req.body.myanswer;
         if(answerTerm !== undefined) {
-            dbHandler.handleNewAnswer(answerTerm, user_id, activeQuestion_id);
+            aDbHandler.handleNewAnswer(answerTerm, user_id, activeQuestion_id);
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
