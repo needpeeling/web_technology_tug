@@ -2,6 +2,8 @@ const sqHandler  = require('./SearchQueryHandler');
 const dbHandler = require('./DatabaseHandler');
 const lrHandler = require('./LoginRegisterHandler')
 
+let user_id = -1;
+
 module.exports = {
     handleSearch: function (req, more) {
         let searchTerm = req.body.search2;
@@ -18,7 +20,7 @@ module.exports = {
         let questionTitle = req.body.title;
         let questionDescr = req.body.description;
         if(questionTitle !== undefined && questionDescr !== undefined) {
-            dbHandler.handleNewQuestion(questionTitle, questionDescr);
+            dbHandler.handleNewQuestion(questionTitle, questionDescr, user_id);
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
@@ -26,10 +28,10 @@ module.exports = {
         }
         return true;
     },
-    handleAnswer: function (req, more) {
+    handleAnswer: function (req, more, activeQuestion_id) {
         let answerTerm = req.body.myanswer;
         if(answerTerm !== undefined) {
-            dbHandler.handleNewAnswer(answerTerm);
+            dbHandler.handleNewAnswer(answerTerm, user_id, activeQuestion_id);
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
@@ -41,7 +43,7 @@ module.exports = {
         let username = req.body.username;
         let password = req.body.psw;
         if(username !== undefined && password !== undefined) {
-            lrHandler.handleLoginAttempt(username, password);
+            user_id = lrHandler.handleLoginAttempt(username, password);
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {

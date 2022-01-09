@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use("/styles", express.static(__dirname + '/styles'));
 
+let user_id = -1;
+let activeQuestion_id = -1;
+
 // #####################################################################################################################
 // ####                            Handling GET Requests                                                            ####
 // #####################################################################################################################
@@ -35,6 +38,7 @@ app.get('/new.html', (req, res) => {
 })
 
 app.get('/question*', (req, res) => {
+    activeQuestion_id = 5; // TODO: Set ID for active Question
     res.sendFile(__dirname + '/question.html')
 })
 
@@ -75,7 +79,7 @@ app.post('/new.html', (req, res) => {
 
 app.post('/question*', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleAnswer(req, false)) {}
+    else if(helpF.handleAnswer(req, false, activeQuestion_id)) {}
     res.sendFile(__dirname + '/question.html')
 })
 
