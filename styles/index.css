@@ -1,12 +1,17 @@
 * {box-sizing: border-box}
 
 body {
-    background-image: url("../img/home.jpg");
+    background-image: url("https://www.pngmagic.com/product_images/pure-white-background-images.jpg");
     background-size: cover; /* for IE9+, Safari 4.1+, Chrome 3.0+, Firefox 3.6+ */
     -webkit-background-size: cover; /* for Safari 3.0 - 4.0 , Chrome 1.0 - 3.0 */
     -moz-background-size: cover; /* optional for Firefox 3.6 */ 
     -o-background-size: cover; /* for Opera 9.5 */
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
 }
 
 
@@ -15,6 +20,12 @@ body {
     width: 50%;
     margin: auto;
     font-size: var(--font-size-body);
+}
+
+#welcome_icon {
+    width: 30px;
+    float: right;
+    animation:  wave-animation 2s 3 forwards;
 }
 
 h1 {
@@ -92,5 +103,39 @@ hr {
     }
 }
 
+@keyframes wave-animation {
+    0% { transform: rotate(  0.0deg); }
+    10% { transform: rotate(-15.0deg); }
+    20% { transform: rotate( 20.0deg); }
+    30% { transform: rotate(-15.0deg); }
+    40% { transform: rotate(  9.0deg); }
+    50% { transform: rotate(  0.0deg); }
+    100% { transform: rotate(  0.0deg); }
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+  
+@-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
   
   
