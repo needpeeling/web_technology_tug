@@ -10,8 +10,6 @@ module.exports = {
         // Returns user_id when successful
     },
     handleRegisterAttempt: function (username, password, password_confirmation) {
-        console.log("Register Attempt with username: " + username + " ,password: " + password +
-                    " and password-confirmation: " + password_confirmation);
         if (registerCheck(username) === 1) {
             let ID = highestMissingUserID();
             const userdata = {
@@ -41,9 +39,6 @@ module.exports = {
         } else {
             console.log("[DEBUG] Username already in Database");
         }
-
-        // TODO: Handle the Register request
-        // This means checking the credential database if username exists and then adding a new map entry
     }
 }
 
