@@ -45,7 +45,7 @@ app.get('/new.html', (req, res) => {
 })
 
 app.get('/question*', (req, res) => {
-    activeQuestion_id = 5; // TODO: Set ID for active Question
+    activeQuestion_id = req.url.replace("/question","");
     res.sendFile(__dirname + '/question.html')
 })
 

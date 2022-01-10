@@ -33,7 +33,7 @@ function createTableEntry(s_res) {
         "                    </div>\n" +
         "                    <div class=\"vote_count\">" + score + "</div>\n" +
         "                </td>\n" +
-        "                <td class=\"question-td\" onclick=\"window.location='question#" + id + "';\">\n" +
+        "                <td class=\"question-td\" onclick=\"window.location='question" + id + "';\">\n" +
         "                    <p>" + title + "</p>\n" +
         "                </td>\n" +
         "            </tr>";
