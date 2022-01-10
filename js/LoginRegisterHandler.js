@@ -49,6 +49,9 @@ module.exports = {
             console.log("[DEBUG] Username already in Database");
         }
         return false;
+    },
+    getUserByID: function (ID) {
+        return findUserByID(ID)
     }
 }
 
@@ -92,6 +95,15 @@ function findUserID(username) {
             iterator++;
         }
         return -1;
+    } else {
+        return -1;
+    }
+}
+
+function findUserByID(ID) {
+    if(fs.existsSync('db/Users.json')) {
+        let users_json = JSON.parse(fs.readFileSync('db/Users.json'));
+        return users_json[ID];
     } else {
         return -1;
     }

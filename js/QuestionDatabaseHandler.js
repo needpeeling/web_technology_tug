@@ -6,6 +6,9 @@ module.exports = {
     },
     getHighesLikedQuestions: function() {
         return findAmountAnswersWithHighestLikes(3);
+    },
+    getQuestionWithID: function(ID) {
+        return findQuestionWithID(ID);
     }
 }
 
@@ -112,6 +115,14 @@ function findQuestionWithScore(score, start) {
             }
             iterator++;
         }
+    }
+    return undefined;
+}
+
+function findQuestionWithID(id) {
+    if(filesys.existsSync('db/Questions.json')) {
+        let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
+        return questions_json[id];
     }
     return undefined;
 }

@@ -80,5 +80,8 @@ module.exports = {
             return -1;
         }
         return 0;
+    },
+    getLoggedInUserID: function() {
+        return user_id;
     }
 }

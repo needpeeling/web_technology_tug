@@ -7,6 +7,8 @@ const port = 3000
 const bodyParser = require('body-parser')
 const helpF      = require('./js/HelperFunctions');
 const icHandler  = require('./js/IndexContentHandler');
+const qcHandler  = require('./js/QuestionContentHandler');
+const qDbHandler = require('./js/QuestionDatabaseHandler');
 const filesys    = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -46,7 +48,11 @@ app.get('/new.html', (req, res) => {
 
 app.get('/question*', (req, res) => {
     activeQuestion_id = req.url.replace("/question","");
-    res.sendFile(__dirname + '/question.html')
+    let question = qDbHandler.getQuestionWithID(activeQuestion_id);
+    let data = filesys.readFileSync(__dirname + '/question.html').toString();
+    data = qcHandler.handleQuestionContent(data, question);
+    res.setHeader("content-type", "text/html");
+    res.send(data);
 })
 
 app.get('/*', (req, res) => {
@@ -99,6 +105,7 @@ app.post('/register.html', (req, res) => {
             data = icHandler.handleMostPopularQuestions(data);
             res.setHeader("content-type", "text/html");
             res.send(data);
+            user_logged_in = 1;
         } else {
             let data = filesys.readFileSync(__dirname + '/register.html').toString();
             data = icHandler.enableSearchResults(data);
