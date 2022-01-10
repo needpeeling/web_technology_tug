@@ -24,9 +24,7 @@ module.exports = {
         // Returns user_id when successful
     },
     handleRegisterAttempt: function (username, password, password_confirmation) {
-        console.log("Register Attempt with username: " + username + " ,password: " + password +
-                    " and password-confirmation: " + password_confirmation);
-        if (registerCheck(username) == 1) {
+        if (registerCheck(username) === 1) {
             let ID = highestMissingUserID();
             const userdata = {
                 "Username":username,
@@ -55,9 +53,6 @@ module.exports = {
         } else {
             console.log("[DEBUG] Username already in Database");
         }
-
-        // TODO: Handle the Register request
-        // This means checking the credential database if username exists and then adding a new map entry
     }
 }
 
@@ -65,7 +60,7 @@ function highestMissingUserID() {
     if(fs.existsSync('db/Users.json')) {
         let users_json = JSON.parse(fs.readFileSync('db/Users.json'));
         let iterator = 0;
-        while (users_json[iterator] != undefined) {
+        while (users_json[iterator] !== undefined) {
             iterator++;
         }
         return iterator;
@@ -78,8 +73,8 @@ function registerCheck(username) {
     if(fs.existsSync('db/Users.json')) {
         let users_json = JSON.parse(fs.readFileSync('db/Users.json'));
         let iterator = 0;
-        while (users_json[iterator] != undefined) {
-            if (users_json[iterator].Username == username) {
+        while (users_json[iterator] !== undefined) {
+            if (users_json[iterator].Username === username) {
                 return 0;
             }
             iterator++;
