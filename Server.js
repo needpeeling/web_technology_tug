@@ -74,10 +74,18 @@ app.post('/about.html', (req, res) => {
 app.post('/login.html', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
     else if(helpF.handleLogin(req, false)) {
-        res.sendFile(__dirname + '/index.html');
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.handleMostPopularQuestions(data);
+        res.setHeader("content-type", "text/html");
+        res.send(data);
         user_logged_in = 1; 
     }
-    else {res.sendFile(__dirname + '/login.html');}
+    else {
+        let data = filesys.readFileSync(__dirname + '/login.html').toString();
+        data = icHandler.enableSearchResults(data);
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+    }
 })
 
 app.post('/register.html', (req, res) => {
@@ -87,9 +95,15 @@ app.post('/register.html', (req, res) => {
         if(result === 0) {
             res.sendFile(__dirname + '/login.html');
         } else if(result === 1) {
-            res.sendFile(__dirname + '/index.html');
+            let data = filesys.readFileSync(__dirname + '/index.html').toString();
+            data = icHandler.handleMostPopularQuestions(data);
+            res.setHeader("content-type", "text/html");
+            res.send(data);
         } else {
-            res.sendFile(__dirname + '/register.html');
+            let data = filesys.readFileSync(__dirname + '/register.html').toString();
+            data = icHandler.enableSearchResults(data);
+            res.setHeader("content-type", "text/html");
+            res.send(data);
         }
     }
 })

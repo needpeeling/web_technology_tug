@@ -69,7 +69,6 @@
     background-color: rgb(255, 220, 220);
     padding: 10px;
     border: 2px dashed red;
-    display: none;
 }
 
 #fail_icon {

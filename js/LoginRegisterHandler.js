@@ -30,15 +30,14 @@ module.exports = {
             const user_data = JSON.stringify(user);
 
             if(fs.existsSync('db/Users.json')) {
-                fs.readFile('db/Users.json', function (err, data) {
-                    var users_json = JSON.parse(data);
-                    users_json[ID] = userdata;
-                    fs.writeFile('db/Users.json', JSON.stringify(users_json), function(err){
-                        if (err) throw err;
-                        console.log("[DEBUG] New User added: " + username);
-                        return true;
-                    });
-                })
+                let data = fs.readFileSync('db/Users.json');
+                var users_json = JSON.parse(data);
+                users_json[ID] = userdata;
+                fs.writeFile('db/Users.json', JSON.stringify(users_json), function(err){
+                    if (err) throw err;
+                });
+                console.log("[DEBUG] New User added: " + username);
+                return true;
             } else {
                 fs.writeFile('db/Users.json', user_data, function(err){
                     if (err) throw err;
