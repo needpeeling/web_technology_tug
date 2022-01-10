@@ -88,7 +88,7 @@ function findAmountAnswersWithHighestLikes(amount) {
             old_res = res;
             res = findQuestionWithScore(result_obj[iterator],0);
 
-            if(res.body === old_res.body) {
+            if(old_res !== undefined && Object.keys(res) === Object.keys(old_res)) {
                 res = findQuestionWithScore(result_obj[iterator], res.id)
             }
 

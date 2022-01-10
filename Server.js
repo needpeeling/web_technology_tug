@@ -7,6 +7,7 @@ const port = 3000
 const bodyParser = require('body-parser')
 const helpF      = require('./js/HelperFunctions');
 const icHandler  = require('./js/IndexContentHandler');
+const filesys    = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -51,14 +52,13 @@ app.get('/*', (req, res) => {
 // ####                            Handling POST Requests                                                           ####
 // #####################################################################################################################
 app.post(['/', '/index*'], (req, res) => {
+    let data = filesys.readFileSync(__dirname + '/index.html').toString();
     if(helpF.handleSearch(req, false)) {
-        let data = icHandler.enableSearchResults();
+        data = icHandler.enableSearchResults(data);
         data = icHandler.handleMostPopularQuestions(data);
-        res.setHeader("content-type", "text/html");
-        res.send(data);
-    } else {
-        res.sendFile(__dirname + '/index.html');
-    }
+    } else {}
+    res.setHeader("content-type", "text/html");
+    res.send(data);
 })
 
 app.post('/about.html', (req, res) => {
