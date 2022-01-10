@@ -52,7 +52,9 @@ app.get('/*', (req, res) => {
 // #####################################################################################################################
 app.post(['/', '/index*'], (req, res) => {
     if(helpF.handleSearch(req, false)) {
-        let data = icHandler.enableSearchResults(res);
+        let data = icHandler.enableSearchResults();
+        data = icHandler.handleMostPopularQuestions(data);
+        res.setHeader("content-type", "text/html");
         res.send(data);
     } else {
         res.sendFile(__dirname + '/index.html');

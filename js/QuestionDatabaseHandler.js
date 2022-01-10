@@ -3,7 +3,9 @@ const filesys = require('fs');
 module.exports = {
     handleNewQuestion: function (questionTitle, questionDescription, user_id) {
         newQuestion(questionTitle, questionDescription, user_id);
-        findAmountAnswersWithHighestLikes(4);
+    },
+    getHighesLikedQuestions: function() {
+        return findAmountAnswersWithHighestLikes(3);
     }
 }
 
