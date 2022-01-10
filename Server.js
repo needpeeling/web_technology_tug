@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 
 
 let activeQuestion_id = -1;
-let user_logged_in = 0;
+let user_logged_in = false;
 
 // #####################################################################################################################
 // ####                            Handling GET Requests                                                            ####
@@ -24,6 +24,15 @@ let user_logged_in = 0;
 app.get(['/', '/index.html'], (req, res) => {
     let data = filesys.readFileSync(__dirname + '/index.html').toString();
     data = icHandler.handleMostPopularQuestions(data);
+    res.setHeader("content-type", "text/html");
+    res.send(data);
+})
+
+app.get('/new.html', (req, res) => {
+    let data = filesys.readFileSync(__dirname + '/new.html').toString();
+    if(user_logged_in) {
+        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Question");
+    }
     res.setHeader("content-type", "text/html");
     res.send(data);
 })
@@ -40,10 +49,6 @@ app.get('/login.html', (req, res) => {
 
 app.get('/register.html', (req, res) => {
     res.sendFile(__dirname + '/register.html')
-})
-
-app.get('/new.html', (req, res) => {
-    res.sendFile(__dirname + '/new.html')
 })
 
 app.get('/question*', (req, res) => {
@@ -84,7 +89,7 @@ app.post('/login.html', (req, res) => {
         data = icHandler.handleMostPopularQuestions(data);
         res.setHeader("content-type", "text/html");
         res.send(data);
-        user_logged_in = 1; 
+        user_logged_in = true;
     }
     else {
         let data = filesys.readFileSync(__dirname + '/login.html').toString();
@@ -105,7 +110,7 @@ app.post('/register.html', (req, res) => {
             data = icHandler.handleMostPopularQuestions(data);
             res.setHeader("content-type", "text/html");
             res.send(data);
-            user_logged_in = 1;
+            user_logged_in = true;
         } else {
             let data = filesys.readFileSync(__dirname + '/register.html').toString();
             data = icHandler.enableSearchResults(data);
@@ -118,7 +123,10 @@ app.post('/register.html', (req, res) => {
 app.post('/new.html', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
     else if(helpF.handleQuestion(req, false)) {}
-    res.sendFile(__dirname + '/new.html')
+    let data = filesys.readFileSync(__dirname + '/index.html').toString();
+    data = icHandler.handleMostPopularQuestions(data);
+    res.setHeader("content-type", "text/html");
+    res.send(data);
 })
 
 app.post('/question*', (req, res) => {
