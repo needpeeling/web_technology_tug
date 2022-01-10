@@ -7,32 +7,24 @@ const port = 3000
 const bodyParser = require('body-parser')
 const helpF      = require('./js/HelperFunctions');
 const icHandler  = require('./js/IndexContentHandler');
-const qcHandler  = require('./js/QuestionContentHandler');
-const qDbHandler = require('./js/QuestionDatabaseHandler');
 const filesys    = require('fs');
+//const questionH  = require('./js/question');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
 let activeQuestion_id = -1;
-let user_logged_in = false;
-
+let user_logged_in = 0;
+filesys.writeFile('db/Logstatus.txt', "False", function(err){
+    if (err) throw err;
+});
 // #####################################################################################################################
 // ####                            Handling GET Requests                                                            ####
 // #####################################################################################################################
 app.get(['/', '/index.html'], (req, res) => {
     let data = filesys.readFileSync(__dirname + '/index.html').toString();
     data = icHandler.handleMostPopularQuestions(data);
-    res.setHeader("content-type", "text/html");
-    res.send(data);
-})
-
-app.get('/new.html', (req, res) => {
-    let data = filesys.readFileSync(__dirname + '/new.html').toString();
-    if(user_logged_in) {
-        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Question");
-    }
     res.setHeader("content-type", "text/html");
     res.send(data);
 })
@@ -51,16 +43,13 @@ app.get('/register.html', (req, res) => {
     res.sendFile(__dirname + '/register.html')
 })
 
+app.get('/new.html', (req, res) => {
+    res.sendFile(__dirname + '/new.html')
+})
+
 app.get('/question*', (req, res) => {
-    activeQuestion_id = req.url.replace("/question","");
-    let question = qDbHandler.getQuestionWithID(activeQuestion_id);
-    let data = filesys.readFileSync(__dirname + '/question.html').toString();
-    data = qcHandler.handleQuestionContent(data, question);
-    if(user_logged_in) {
-        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
-    }
-    res.setHeader("content-type", "text/html");
-    res.send(data);
+    activeQuestion_id = 5; // TODO: Set ID for active Question
+    res.sendFile(__dirname + '/question.html')
 })
 
 app.get('/*', (req, res) => {
@@ -92,7 +81,11 @@ app.post('/login.html', (req, res) => {
         data = icHandler.handleMostPopularQuestions(data);
         res.setHeader("content-type", "text/html");
         res.send(data);
-        user_logged_in = true;
+        user_logged_in = 1;
+        //questionH.setLoginStatus(1);
+        filesys.writeFile('db/Logstatus.txt', "True", function(err){
+            if (err) throw err;
+        });
     }
     else {
         let data = filesys.readFileSync(__dirname + '/login.html').toString();
@@ -113,7 +106,6 @@ app.post('/register.html', (req, res) => {
             data = icHandler.handleMostPopularQuestions(data);
             res.setHeader("content-type", "text/html");
             res.send(data);
-            user_logged_in = true;
         } else {
             let data = filesys.readFileSync(__dirname + '/register.html').toString();
             data = icHandler.enableSearchResults(data);
@@ -126,10 +118,7 @@ app.post('/register.html', (req, res) => {
 app.post('/new.html', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
     else if(helpF.handleQuestion(req, false)) {}
-    let data = filesys.readFileSync(__dirname + '/index.html').toString();
-    data = icHandler.handleMostPopularQuestions(data);
-    res.setHeader("content-type", "text/html");
-    res.send(data);
+    res.sendFile(__dirname + '/new.html')
 })
 
 app.post('/question*', (req, res) => {
