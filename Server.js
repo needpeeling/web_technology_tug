@@ -6,6 +6,7 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser')
 const helpF      = require('./js/HelperFunctions');
+const icHandler  = require('./js/IndexContentHandler');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -50,8 +51,12 @@ app.get('/*', (req, res) => {
 // ####                            Handling POST Requests                                                           ####
 // #####################################################################################################################
 app.post(['/', '/index*'], (req, res) => {
-    if(helpF.handleSearch(req, false)) {}
-    res.sendFile(__dirname + '/index.html');
+    if(helpF.handleSearch(req, false)) {
+        let data = icHandler.enableSearchResults(res);
+        res.send(data);
+    } else {
+        res.sendFile(__dirname + '/index.html');
+    }
 })
 
 app.post('/about.html', (req, res) => {
