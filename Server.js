@@ -56,6 +56,9 @@ app.get('/question*', (req, res) => {
     let question = qDbHandler.getQuestionWithID(activeQuestion_id);
     let data = filesys.readFileSync(__dirname + '/question.html').toString();
     data = qcHandler.handleQuestionContent(data, question);
+    if(user_logged_in) {
+        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
+    }
     res.setHeader("content-type", "text/html");
     res.send(data);
 })
