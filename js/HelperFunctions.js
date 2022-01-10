@@ -57,7 +57,11 @@ module.exports = {
         let password = req.body.psw;
         let pwd_conf = req.body.psw_repeat;
         if(username !== undefined && password !== undefined && pwd_conf !== undefined) {
-            lrHandler.handleRegisterAttempt(username, password, pwd_conf);
+            if (password == pwd_conf) {
+               lrHandler.handleRegisterAttempt(username, password, pwd_conf); 
+            } else {
+                return false;
+            }
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
