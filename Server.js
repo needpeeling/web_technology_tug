@@ -70,8 +70,16 @@ app.post('/login.html', (req, res) => {
 
 app.post('/register.html', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleRegister(req, false)) {res.sendFile(__dirname + '/login.html');}
-    else {res.sendFile(__dirname + '/register.html');}
+    else {
+        let result = helpF.handleRegister(req, false)
+        if(result === 0) {
+            res.sendFile(__dirname + '/login.html');
+        } else if(result === 1) {
+            res.sendFile(__dirname + '/index.html');
+        } else {
+            res.sendFile(__dirname + '/register.html');
+        }
+    }
 })
 
 app.post('/new.html', (req, res) => {

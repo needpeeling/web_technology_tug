@@ -46,6 +46,9 @@ module.exports = {
         console.log("username: " + username + " , password: " + password);
         if(username !== undefined && password !== undefined) {
             user_id = lrHandler.handleLoginAttempt(username, password);
+            if(user_id === -1) {
+                return false;
+            }
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
@@ -61,13 +64,19 @@ module.exports = {
             if (password === pwd_conf) {
                lrHandler.handleRegisterAttempt(username, password);
             } else {
-                return false;
+                return -1;
             }
+        } else if (username !== undefined && password !== undefined && pwd_conf === undefined) {
+            user_id = lrHandler.handleLoginAttempt(username, password);
+            if(user_id !== -1) {
+                return 1;
+            }
+            return 0;
         } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
-            return false;
+            return -1;
         }
-        return true;
+        return 0;
     }
 }
