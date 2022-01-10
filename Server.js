@@ -11,7 +11,7 @@ const filesys    = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use("/", express.static(__dirname + '/'));
+
 
 let activeQuestion_id = -1;
 let user_logged_in = 0;
@@ -20,8 +20,13 @@ let user_logged_in = 0;
 // ####                            Handling GET Requests                                                            ####
 // #####################################################################################################################
 app.get(['/', '/index.html'], (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    let data = filesys.readFileSync(__dirname + '/index.html').toString();
+    data = icHandler.handleMostPopularQuestions(data);
+    res.setHeader("content-type", "text/html");
+    res.send(data);
 })
+
+app.use("/", express.static(__dirname + '/'));
 
 app.get('/about.html', (req, res) => {
     res.sendFile(__dirname + '/about.html')
@@ -55,8 +60,8 @@ app.post(['/', '/index*'], (req, res) => {
     let data = filesys.readFileSync(__dirname + '/index.html').toString();
     if(helpF.handleSearch(req, false)) {
         data = icHandler.enableSearchResults(data);
-        data = icHandler.handleMostPopularQuestions(data);
     } else {}
+    data = icHandler.handleMostPopularQuestions(data);
     res.setHeader("content-type", "text/html");
     res.send(data);
 })
