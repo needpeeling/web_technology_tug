@@ -37,17 +37,20 @@ module.exports = {
                     fs.writeFile('db/Users.json', JSON.stringify(users_json), function(err){
                         if (err) throw err;
                         console.log("[DEBUG] New User added: " + username);
+                        return true;
                     });
                 })
             } else {
                 fs.writeFile('db/Users.json', user_data, function(err){
                     if (err) throw err;
                     console.log("[DEBUG] New User added: " + username);
+                    return true;
                 });
             }
         } else {
             console.log("[DEBUG] Username already in Database");
         }
+        return false;
     }
 }
 
