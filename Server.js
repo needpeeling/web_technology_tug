@@ -54,14 +54,18 @@ app.get('/register.html', (req, res) => {
 app.get('/question*', (req, res) => {
     activeQuestion_id = req.url.replace("/question","");
     let question = qDbHandler.getQuestionWithID(activeQuestion_id);
-    let data = filesys.readFileSync(__dirname + '/question.html').toString();
-    data = qcHandler.handleQuestionContent(data, question);
-    data = qcHandler.handleAnswerContent(data, question, activeQuestion_id)
-    if(user_logged_in) {
-        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
+    if(question === undefined) {
+        res.sendFile(__dirname + '/404.html')
+    } else {
+        let data = filesys.readFileSync(__dirname + '/question.html').toString();
+        data = qcHandler.handleQuestionContent(data, question);
+        data = qcHandler.handleAnswerContent(data, question, activeQuestion_id)
+        if(user_logged_in) {
+            data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
+        }
+        res.setHeader("content-type", "text/html");
+        res.send(data);
     }
-    res.setHeader("content-type", "text/html");
-    res.send(data);
 })
 
 app.get('/*', (req, res) => {
@@ -136,7 +140,16 @@ app.post('/new.html', (req, res) => {
 app.post('/question*', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
     else if(helpF.handleAnswer(req, false, activeQuestion_id)) {}
-    res.sendFile(__dirname + '/question.html')
+    activeQuestion_id = req.url.replace("/question","");
+    let question = qDbHandler.getQuestionWithID(activeQuestion_id);
+    let data = filesys.readFileSync(__dirname + '/question.html').toString();
+    data = qcHandler.handleQuestionContent(data, question);
+    data = qcHandler.handleAnswerContent(data, question, activeQuestion_id)
+    if(user_logged_in) {
+        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
+    }
+    res.setHeader("content-type", "text/html");
+    res.send(data);
 })
 
 // #####################################################################################################################

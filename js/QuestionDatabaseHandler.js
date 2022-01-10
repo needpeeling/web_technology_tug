@@ -5,7 +5,7 @@ module.exports = {
         newQuestion(questionTitle, questionDescription, user_id);
     },
     getHighesLikedQuestions: function() {
-        return findAmountAnswersWithHighestLikes(3);
+        return findAmountAnswersWithHighestLikes(10);
     },
     getQuestionWithID: function(ID) {
         return findQuestionWithID(ID);
@@ -85,14 +85,11 @@ function findAmountAnswersWithHighestLikes(amount) {
         result_obj = result_obj.sort(function(a,b){return b-a})
 
         iterator = 0;
-        let res     = undefined;
-        let old_res = undefined;
+        let res = undefined;
         while(iterator < amount) {
-            old_res = res;
             res = findQuestionWithScore(result_obj[iterator],0);
-
-            if(old_res !== undefined && Object.keys(res) === Object.keys(old_res)) {
-                res = findQuestionWithScore(result_obj[iterator], res.id)
+            while(contains(result,res)) {
+                res = findQuestionWithScore(result_obj[iterator], parseInt(Object.keys(res))+1)
             }
 
             result.push(res);
@@ -103,6 +100,23 @@ function findAmountAnswersWithHighestLikes(amount) {
     } else {
         return undefined;
     }
+}
+
+function contains(arr, entry) {
+    if(entry === undefined || arr === undefined) {
+        return false;
+    }
+    let iterator = 0;
+    while(iterator < Object.keys(arr).length) {
+        if(arr[iterator][Object.keys(arr[iterator])].Title        === entry[Object.keys(entry)].Title        &&
+           arr[iterator][Object.keys(arr[iterator])].Body         === entry[Object.keys(entry)].Body         &&
+           arr[iterator][Object.keys(arr[iterator])].OwnerUserId  === entry[Object.keys(entry)].OwnerUserId  &&
+           arr[iterator][Object.keys(arr[iterator])].CreationDate === entry[Object.keys(entry)].CreationDate) {
+            return true;
+        }
+        iterator++;
+    }
+    return false;
 }
 
 function findQuestionWithScore(score, start) {

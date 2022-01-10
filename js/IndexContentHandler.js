@@ -8,8 +8,10 @@ module.exports = {
         let entries = "";
         data = data.replace(/<h3>Most popular Questions<\/h3>[\S\s.]*<\/table>/gi, "<h3>Most popular Questions</h3></table>");
         while(iterator < Object.keys(result).length) {
-            let entry = createTableEntry(result[iterator]);
-            entries = entries + entry;
+            if(result[iterator] !== undefined) {
+                let entry = createTableEntry(result[iterator]);
+                entries = entries + entry;
+            }
             iterator++;
         }
         data = data.replace(/<h3>Most popular Questions<\/h3><\/table>/gi, "<h3>Most popular Questions</h3>" + entries + "</table>");

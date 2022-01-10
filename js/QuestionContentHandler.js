@@ -3,7 +3,10 @@ const aDbHandler = require("./AnswerDatabaseHandler");
 
 module.exports = {
     handleQuestionContent: function (data, question) {
-        let username = lrHandler.getUserByID(question.OwnerUserId).Username;
+        let username = lrHandler.getUserByID(question.OwnerUserId);
+        if(username !== undefined) {
+            username = username.Username;
+        }
         data = data.replace(/Insert Question Title/gi, question.Title);
         data = data.replace(/Insert Question Body/gi, question.Body);
         data = data.replace(/Insert User Name/gi, username);
@@ -11,7 +14,6 @@ module.exports = {
         return data;
     },
     handleAnswerContent: function (data, question, question_id) {
-        let username = lrHandler.getUserByID(question.OwnerUserId).Username;
         let result = aDbHandler.getAllAnswersWithQuestionID(question_id);
         let iterator = 0;
         let entries = "";
