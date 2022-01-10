@@ -3,6 +3,20 @@ const fs = require('fs');
 module.exports = {
     handleLoginAttempt: function (username, password) {
         console.log("Login Attempt with username: " + username + " and password: " + password);
+        let user_id = findUserID(username);
+        if (user_id == -1) {
+            console.log("[DEBUG] User " + username + " is not in Database");
+            return -1
+        } else {
+            let password_check = passwordCheck(user_id, password);
+            if (password_check == 1) {
+                console.log("[DEBUG] User " + username + " logged in successfully");
+                return user_id;
+            } else {
+                console.log("[DEBUG] User " + username + " has wrong password");
+                return -1;
+            }
+        }
         return 4;
         // TODO: Handle the Login request
         // This means checking the credential database if username exists and password is correct
@@ -73,5 +87,30 @@ function registerCheck(username) {
         return 1;
     } else {
         return 1;
+    }
+}
+
+function findUserID(username) {
+    if(fs.existsSync('db/Users.json')) {
+        let users_json = JSON.parse(fs.readFileSync('db/Users.json'));
+        let iterator = 0;
+        while (users_json[iterator] != undefined) {
+            if (users_json[iterator].Username == username) {
+                return iterator;
+            }
+            iterator++;
+        }
+        return -1;
+    } else {
+        return -1;
+    }
+}
+
+function passwordCheck(user_id, password) {
+    let users_json = JSON.parse(fs.readFileSync('db/Users.json'));
+    if (users_json[user_id].Password == password) {
+        return 1;
+    } else {
+        return 0;
     }
 }

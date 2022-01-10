@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 app.use("/", express.static(__dirname + '/'));
 
 let activeQuestion_id = -1;
+let user_logged_in = 0;
 
 // #####################################################################################################################
 // ####                            Handling GET Requests                                                            ####
@@ -60,8 +61,11 @@ app.post('/about.html', (req, res) => {
 
 app.post('/login.html', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleLogin(req, false)) {}
-    res.sendFile(__dirname + '/login.html');
+    else if(helpF.handleLogin(req, false)) {
+        res.sendFile(__dirname + '/index.html');
+        user_logged_in = 1; 
+    }
+    else {res.sendFile(__dirname + '/login.html');}
 })
 
 app.post('/register.html', (req, res) => {

@@ -43,6 +43,7 @@ module.exports = {
     handleLogin: function (req, more) {
         let username = req.body.username;
         let password = req.body.psw;
+        console.log("username: " + username + " , password: " + password);
         if(username !== undefined && password !== undefined) {
             user_id = lrHandler.handleLoginAttempt(username, password);
         } else if(!more) {
