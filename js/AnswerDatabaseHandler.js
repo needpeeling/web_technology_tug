@@ -3,6 +3,9 @@ const filesys = require('fs');
 module.exports = {
     handleNewAnswer: function (answerTerm, user_id, parent_id) {
         newAnswer(answerTerm, user_id, parent_id);
+    },
+    getAllAnswersWithQuestionID(ID) {
+        return findAllAnswersWithParentID(ID);
     }
 }
 
@@ -92,6 +95,6 @@ function findAmountAnswersWithParentID(amount, parentID) {
 // Usage: findAllAnswersWithParentID(5)
 // ParentID = ID of Question
 function findAllAnswersWithParentID(parentID) {
-    findAmountAnswersWithParentID(1000,5)
+    return findAmountAnswersWithParentID(1000,parentID)
 }
 
