@@ -58,8 +58,8 @@ module.exports = {
         let password = req.body.psw;
         let pwd_conf = req.body.psw_repeat;
         if(username !== undefined && password !== undefined && pwd_conf !== undefined) {
-            if (password == pwd_conf) {
-               lrHandler.handleRegisterAttempt(username, password, pwd_conf); 
+            if (password === pwd_conf) {
+               lrHandler.handleRegisterAttempt(username, password);
             } else {
                 return false;
             }
