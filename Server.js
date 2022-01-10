@@ -110,5 +110,5 @@ app.post('/question*', (req, res) => {
 // ####                            Starting Server                                                                  ####
 // #####################################################################################################################
 app.listen(port, () => {
-    console.log(`QuestionOverflow-Server listening at http://localhost:${port}`)
+    console.log(`[DEBUG]QuestionOverflow-Server listening at http://localhost:${port}`)
 })

@@ -95,7 +95,7 @@ function findAmountAnswersWithHighestLikes(amount) {
             result.push(res);
             iterator++;
         }
-        console.log(result);
+
         return result;
     } else {
         return undefined;

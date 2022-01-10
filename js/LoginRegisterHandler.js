@@ -2,7 +2,6 @@ const fs = require('fs');
 
 module.exports = {
     handleLoginAttempt: function (username, password) {
-        console.log("Login Attempt with username: " + username + " and password: " + password);
         let user_id = findUserID(username);
         if (user_id === -1) {
             console.log("[DEBUG] User " + username + " is not in Database");
