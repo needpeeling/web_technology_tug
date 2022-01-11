@@ -101,6 +101,7 @@ app.post(['/', '/index*'], (req, res) => {
     let data = filesys.readFileSync(__dirname + '/index.html').toString();
     if(helpF.handleSearch(req, true)) {
         data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
     } else if(req.body.logout !== undefined) {
         user_logged_in = false;
         helpF.resetUserID();

@@ -7,6 +7,9 @@ module.exports = {
     getHighestLikedQuestions: function() {
         return findAmountAnswersWithHighestLikes(10);
     },
+    getBestFittingW2VQuestions: function() {
+        return findAmountAnswersWithHighestW2VValue(10);
+    },
     getQuestionWithID: function(ID) {
         return findQuestionWithID(ID);
     },

@@ -3,8 +3,8 @@ const qDbHandler = require('./QuestionDatabaseHandler');
 const lrHandler  = require('./LoginRegisterHandler');
 
 module.exports = {
-    handleMostPopularQuestions: function (data, questions_db) {
-        let result = qDbHandler.getHighestLikedQuestions(questions_db);
+    handleMostPopularQuestions: function (data) {
+        let result = qDbHandler.getHighestLikedQuestions();
         let iterator = 0;
         let entries = "";
         data = data.replace(/<h3>Most popular Questions<\/h3>[\S\s.]*<\/table>/gi, "<h3>Most popular Questions</h3></table>");
@@ -45,6 +45,25 @@ module.exports = {
             "                <a href=\"login.html\"><img id=\"login_icon\" src=\"icons/login.png\" alt=\"Login\" /></a>\r\n" +
             "            </div>";
         data = data.replace(replace_data, logout_data)
+        return data;
+    },
+    handleBestSuitingW2VQuestions: function(data, searchTerm) {
+        let result = qDbHandler.getBestFittingW2VQuestions();
+        if(result === undefined) {
+            result = qDbHandler.getHighestLikedQuestions();
+        }
+        let iterator = 0;
+        let entries = "";
+        data = data.replace("Welcome","You searched for: \"" + searchTerm + "\"");
+        data = data.replace(/<h3 >Search Result<\/h3>[\S\s.]*?<\/table>/gi, "<h3>Search Result</h3></table>");
+        while(iterator < Object.keys(result).length) {
+            if(result[iterator] !== undefined) {
+                let entry = createTableEntry(result[iterator]);
+                entries = entries + entry;
+            }
+            iterator++;
+        }
+        data = data.replace(/<h3>Search Result<\/h3><\/table>/gi, "<h3>Search Result</h3>" + entries + "</table>");
         return data;
     }
 }
