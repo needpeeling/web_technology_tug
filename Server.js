@@ -34,7 +34,8 @@ app.get('/new.html', (req, res) => {
     let data = filesys.readFileSync(__dirname + '/new.html').toString();
     data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
     if(user_logged_in) {
-        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Question");
+        data = data.replace(/disabled/gi,"");
+        data = data.replace(/Log In to Unlock!/gi,"Submit Question");
     }
     res.setHeader("content-type", "text/html");
     res.send(data);
@@ -75,7 +76,8 @@ app.get('/question*', (req, res) => {
         data = qcHandler.handleAnswerContent(data, question, activeQuestion_id, user_logged_in);
         data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
         if(user_logged_in) {
-            data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
+            data = data.replace(/disabled/gi,"");
+            data = data.replace(/Log In to Unlock!/gi,"Submit Answer");
         }
         res.setHeader("content-type", "text/html");
         res.send(data);
