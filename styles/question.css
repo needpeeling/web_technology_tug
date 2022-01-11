@@ -125,11 +125,10 @@ hr {
 
 .btn-sep:before {
     background: black;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 150px 0px 0px 150px;
 }
 
 .submitanswer:before {
-    font-family: 'FontAwesome';
     color: white;
     font-style: normal;
     font-weight: normal;
@@ -141,13 +140,15 @@ hr {
     height: 100%;
     left: 0;
     top: 0;
-    line-height: 2.2;
+    line-height: 51;
     font-size: 140%;
-    width: 60px;
+    width: 80px;
 }
 
 .icon-send:before {
-    content: "\f1d8";
+    content: url(../icons/paper-plane.png);
+    width: 1000px;
+    zoom: 7%;
 }
 
 .submitanswer:hover {
@@ -174,7 +175,7 @@ hr {
     margin-top: -20px;
     width: 100px;
     height: 100px;
-    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    background: url("../img/heart.png") no-repeat;
     cursor: pointer;
     transition: background-position 500ms steps(28);
     transition-duration: 0s;

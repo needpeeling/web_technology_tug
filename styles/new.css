@@ -91,11 +91,11 @@ hr {
 
 .btn-sep:before {
     background: black;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 150px 0px 0px 150px;
 }
 
 .submitquestion:before {
-    font-family: 'FontAwesome';
+    /* font-family: 'FontAwesome'; */
     color: white;
     font-style: normal;
     font-weight: normal;
@@ -107,19 +107,20 @@ hr {
     height: 100%;
     left: 0;
     top: 0;
-    line-height: 2.2;
+    line-height: 51;
     font-size: 140%;
-    width: 60px;
+    width: 80px;
 }
 
 .icon-send:before {
-    content: "\f1d8";
+    content: url(../icons/paper-plane.png);
+    width: 1000px;
+    zoom: 7%;
 }
 
 .submitquestion:hover {
     opacity: 1;
     width: 100%;
-    
 } 
 
 #question_icon {
