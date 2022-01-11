@@ -1,0 +1,28 @@
+{
+  "name": "webtech",
+  "version": "1.0.0",
+  "description": "A Question Web-Server compareable to Stackoverflow for WT WS2021",
+  "main": "Server.js",
+  "scripts": {
+    "test": "node Server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/needpeeling/web_technology_tug.git"
+  },
+  "keywords": [
+    "stackoverflow",
+    "databases",
+    "questions",
+    "answers"
+  ],
+  "author": "Martin Gius, Christian Seifert, Dominik Sebastian Florea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/needpeeling/web_technology_tug/issues"
+  },
+  "homepage": "https://github.com/needpeeling/web_technology_tug#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
