@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/needpeeling/web_technology_tug#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "word2vec": "^1.1.5"
   }
 }
