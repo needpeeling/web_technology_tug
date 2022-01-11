@@ -91,7 +91,7 @@ function findAmountAnswersWithHighestLikes(amount) {
         let result = [];
         let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
         let iterator = 0;
-        while(iterator < Object.keys(questions_json).length && iterator < 100) { // Only look at first 100 entries
+        while(iterator < Object.keys(questions_json).length && iterator < 50) { // Only look at first 50 entries
             if(questions_json[iterator] !== undefined) {
                 result_obj.push({[iterator]:questions_json[iterator].Score});
             }
@@ -103,7 +103,7 @@ function findAmountAnswersWithHighestLikes(amount) {
         let res = undefined;
         while(iterator < amount) {
             if(result_obj[iterator] !== undefined) {
-                res = {[iterator]:questions_json[Object.keys(result_obj[iterator])[0]]};
+                res = {[Object.keys(result_obj[iterator])[0]]:questions_json[Object.keys(result_obj[iterator])[0]]};
                 result.push(res);
             }
             iterator++;

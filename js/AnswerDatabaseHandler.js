@@ -89,8 +89,8 @@ function findAmountAnswersWithParentID(amount, parentID) {
         let result_obj = [];
         let answers_json = JSON.parse(filesys.readFileSync('db/Answers.json'));
         let iterator = 0;
-        while(iterator < Object.keys(answers_json).length && Object.keys(result_obj).length < amount) {
-            if(answers_json[iterator].ParentId === parentID) {
+        while(iterator < Object.keys(answers_json).length && Object.keys(result_obj).length < amount && iterator < 100) {
+            if(answers_json[iterator] !== undefined && answers_json[iterator].ParentId === parentID) {
                 const answer = {
                     [iterator]: answers_json[iterator]
                 };
@@ -108,6 +108,6 @@ function findAmountAnswersWithParentID(amount, parentID) {
 // Usage: findAllAnswersWithParentID(5)
 // ParentID = ID of Question
 function findAllAnswersWithParentID(parentID) {
-    return findAmountAnswersWithParentID(1000,parentID)
+    return findAmountAnswersWithParentID(10,parentID)
 }
 
