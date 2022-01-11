@@ -59,7 +59,7 @@
     margin-bottom: 25px;
 }
 
-#login_icon, #register_icon {
+#login_icon, #login_icon, #register_icon {
     width: 30px;
     float: right;
 }
