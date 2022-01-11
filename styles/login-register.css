@@ -64,6 +64,19 @@
     float: right;
 }
 
+.logout-container {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#logout_btn {
+    border: none;
+    background: none;
+    margin-top: 5px;
+}
+
 .alert_failed {
     text-align: center;
     background-color: rgb(255, 220, 220);

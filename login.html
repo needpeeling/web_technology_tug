@@ -25,6 +25,13 @@
             <div class="login-container">
                 <a href="login.html"><img id="login_icon" src="icons/login.png" alt="Login" /></a>
             </div>
+            <div class="logout-container" style="display:none;">
+                <small>Logged in as <b>Admin</b></small>
+                <form action="" method="POST">
+                    <input type="hidden" name="logout" value="1">
+                    <button type="submit" id="logout_btn"><img id="login_icon" src="icons/logout.png" alt="Logout" /></button>
+                </form>
+            </div>
         </div>
     </header>
     <form action="" method="POST">
