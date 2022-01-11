@@ -59,7 +59,6 @@ hr {
 }
 
 .submitquestion {
-    background-color: var(--theme-color);
     margin: 8px 0;
     border: none;
     cursor: pointer;
@@ -74,6 +73,12 @@ hr {
     transition: all 0.3s;
     margin:0 auto;
     display:block;
+    padding: 16px;
+    background: #ff3232;
+    background: -moz-linear-gradient(-15deg, black 0%, black 15%, var(--theme-color) 16%, var(--theme-color) 100%);
+    background: -webkit-linear-gradient(-15deg, black 0%,black 15%,var(--theme-color) 16%,var(--theme-color) 100%);
+    background: linear-gradient(105deg, black 0%,black 15%,var(--theme-color) 16%,var(--theme-color) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=black, endColorstr=var(--theme-color),GradientType=1 );
 }
 
 .submitquestion:after {
@@ -83,40 +88,14 @@ hr {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-  }
-
-.btn-sep {
-    padding: 16px 60px 16px 120px;
 }
 
-.btn-sep:before {
-    background: black;
-    border-radius: 150px 0px 0px 150px;
+
+#paper {
+    width: 20px;
+    float: left;
 }
 
-.submitquestion:before {
-    /* font-family: 'FontAwesome'; */
-    color: white;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    position: absolute;
-    height: 100%;
-    left: 0;
-    top: 0;
-    line-height: 51;
-    font-size: 140%;
-    width: 80px;
-}
-
-.icon-send:before {
-    content: url(../icons/paper-plane.png);
-    width: 1000px;
-    zoom: 7%;
-}
 
 .submitquestion:hover {
     opacity: 1;
