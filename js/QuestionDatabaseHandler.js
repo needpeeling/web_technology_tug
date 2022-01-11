@@ -156,17 +156,44 @@ function findQuestionWithID(id) {
 
 // Usage: findAllAnswersWithHighestLikes()
 function findAllAnswersWithHighestLikes() {
-    findAmountAnswersWithHighestLikes(500)
+    findAmountAnswersWithHighestLikes(100)
 }
 
 // Usage: findAmountAnswersWithHighestW2VValue(10)
 // amount = How many results you want
-function findAmountAnswersWithHighestW2VValue() {
-    // TODO: Implement
+function findAmountAnswersWithHighestW2VValue(amount) {
+    if(filesys.existsSync('db/FileWithW2VValues.json') && filesys.existsSync('db/Questions.json')) {
+        let result_obj = [];
+        let result = [];
+        let w2vv_json = JSON.parse(filesys.readFileSync('db/FileWithW2VValues.json'));
+        let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
+        let iterator = 0;
+        while(iterator < Object.keys(w2vv_json).length && iterator < 50) { // Only look at first 50 entries (Performance)
+            if(w2vv_json[iterator] !== undefined) {
+                result_obj.push({[iterator]:w2vv_json[iterator].Score});
+            }
+            iterator++;
+        }
+        result_obj = result_obj.sort(function(a,b){return b[Object.keys(b)]-a[Object.keys(a)]})
+
+        iterator = 0;
+        let res = undefined;
+        while(iterator < amount) {
+            if(result_obj[iterator] !== undefined) {
+                res = {[Object.keys(result_obj[iterator])[0]]:questions_json[Object.keys(result_obj[iterator])[0]]};
+                result.push(res);
+            }
+            iterator++;
+        }
+
+        return result;
+    } else {
+        return undefined;
+    }
 }
 
 // Usage: findAllAnswersWithHighestLikes()
 function findAllAnswersWithHighestW2VValue() {
-    findAmountAnswersWithHighestW2VValue(1000)
+    findAmountAnswersWithHighestW2VValue(100)
 }
 
