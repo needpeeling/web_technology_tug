@@ -89,8 +89,8 @@ module.exports = {
             console.log("[DEBUG] Score increased for Answer " + answerID);
         }else if(questionID !== undefined) {
             qDbHandler.increaseScoreOfQuestion(questionID);
-            console.log("[DEBUG] Score increased for Question " + answerID);
-        } if(!more) {
+            console.log("[DEBUG] Score increased for Question " + questionID);
+        } else if(!more) {
             console.log("[DEBUG] Invalid Body!")
         } else {
             return false;
