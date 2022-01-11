@@ -59,25 +59,9 @@
     margin-bottom: 25px;
 }
 
-#login_icon, #logout_icon, #register_icon {
+#login_icon, #register_icon {
     width: 30px;
     float: right;
-}
-
-#logout_icon {
-    width: 50px;
-}
-
-.logout-container {
-    float: right;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-#logout_btn {
-    border: none;
-    background: none;
 }
 
 .alert_failed {

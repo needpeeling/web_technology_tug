@@ -92,6 +92,22 @@
     margin-right: 12px;
 }
 
+#logout_icon {
+    width: 45px;
+    cursor: pointer;
+}
+
+.logout-container {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#logout_btn {
+    border: none;
+    background: none;
+}
 
 @media screen and (max-width: 1250px) {
 
