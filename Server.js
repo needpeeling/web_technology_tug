@@ -4,7 +4,6 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const bodyParser  = require('body-parser')
 const helpF       = require('./js/HelperFunctions');
 const icHandler   = require('./js/IndexContentHandler');
 const qcHandler   = require('./js/QuestionContentHandler');
@@ -13,8 +12,8 @@ const filesys     = require('fs');
 const {promisify} = require('util');
 const sleep       = promisify(setTimeout);
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 let activeQuestion_id = -1;
 let user_logged_in = false;
