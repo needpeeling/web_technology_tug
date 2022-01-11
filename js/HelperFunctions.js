@@ -99,5 +99,8 @@ module.exports = {
     },
     getLoggedInUserID: function() {
         return user_id;
+    },
+    resetUserID: function() {
+        user_id = -1;
     }
 }

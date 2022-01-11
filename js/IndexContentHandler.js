@@ -1,5 +1,6 @@
 const filesys    = require('fs');
 const qDbHandler = require('./QuestionDatabaseHandler');
+const lrHandler  = require('./LoginRegisterHandler');
 
 module.exports = {
     handleMostPopularQuestions: function (data) {
@@ -19,6 +20,31 @@ module.exports = {
     },
     enableSearchResults: function (data) {
         data = data.replace(/style=\"display: none\"/gi, "");
+        return data;
+    },
+    handleLoginHeader: function (data, logged_in, userID) {
+        if(!logged_in) {
+            return data;
+        }
+        let username = "undefined";
+        if(userID !== -1 || userID !== undefined) {
+            username = lrHandler.getUserByID(userID);
+            if(username !== undefined) {
+                username = username.Username;
+            }
+        }
+        let logout_data = "" +
+            "<div class=\"logout-container\">\n" +
+            "    <small>Logged in as <b>" + username + "</b></small>\n" +
+            "    <form action=\"\" method=\"POST\">\n" +
+            "        <input type=\"hidden\" name=\"logout\" value=\"1\">\n" +
+            "        <button type=\"submit\" id=\"logout_btn\"><img id=\"logout_icon\" src=\"icons/logout.png\" alt=\"Logout\" /></button>\n" +
+            "    </form>\n" +
+            "</div>"
+        let replace_data = "<div class=\"login-container\">\r\n" +
+            "                <a href=\"login.html\"><img id=\"login_icon\" src=\"icons/login.png\" alt=\"Login\" /></a>\r\n" +
+            "            </div>";
+        data = data.replace(replace_data, logout_data)
         return data;
     }
 }
