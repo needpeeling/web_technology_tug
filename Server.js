@@ -60,8 +60,8 @@ app.get('/question*', (req, res) => {
         res.sendFile(__dirname + '/404.html')
     } else {
         let data = filesys.readFileSync(__dirname + '/question.html').toString();
-        data = qcHandler.handleQuestionContent(data, question);
-        data = qcHandler.handleAnswerContent(data, question, activeQuestion_id)
+        data = qcHandler.handleQuestionContent(data, question, activeQuestion_id, user_logged_in);
+        data = qcHandler.handleAnswerContent(data, question, activeQuestion_id, user_logged_in)
         if(user_logged_in) {
             data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
         }
@@ -141,8 +141,12 @@ app.post('/new.html', (req, res) => {
 
 app.post('/question*', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleAnswer(req, false, activeQuestion_id)) {
+    else if(helpF.handleAnswer(req, true, activeQuestion_id)) {
         sleep(100).then(() => {
+            handleQuestionPost(req, res);
+        })
+    } else if(helpF.handleClap(req, false)) {
+        sleep(500).then(() => {
             handleQuestionPost(req, res);
         })
     } else {
@@ -154,8 +158,8 @@ function handleQuestionPost(req, res) {
     activeQuestion_id = req.url.replace("/question","");
     let question = qDbHandler.getQuestionWithID(activeQuestion_id);
     let data = filesys.readFileSync(__dirname + '/question.html').toString();
-    data = qcHandler.handleQuestionContent(data, question);
-    data = qcHandler.handleAnswerContent(data, question, activeQuestion_id)
+    data = qcHandler.handleQuestionContent(data, question, activeQuestion_id, user_logged_in);
+    data = qcHandler.handleAnswerContent(data, question, activeQuestion_id, user_logged_in)
     if(user_logged_in) {
         data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
     }

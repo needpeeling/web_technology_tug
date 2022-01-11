@@ -81,6 +81,22 @@ module.exports = {
         }
         return 0;
     },
+    handleClap: function(req, more) {
+        let answerID = req.body.answerID;
+        let questionID = req.body.questionID;
+        if(answerID !== undefined) {
+            aDbHandler.increaseScoreOfAnswer(answerID);
+            console.log("[DEBUG] Score increased for Answer " + answerID);
+        }else if(questionID !== undefined) {
+            qDbHandler.increaseScoreOfQuestion(questionID);
+            console.log("[DEBUG] Score increased for Question " + answerID);
+        } if(!more) {
+            console.log("[DEBUG] Invalid Body!")
+        } else {
+            return false;
+        }
+        return true;
+    },
     getLoggedInUserID: function() {
         return user_id;
     }

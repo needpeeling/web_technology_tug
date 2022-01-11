@@ -6,6 +6,19 @@ module.exports = {
     },
     getAllAnswersWithQuestionID(ID) {
         return findAllAnswersWithParentID(ID);
+    },
+    increaseScoreOfAnswer(ID) {
+        if(filesys.existsSync('db/Answers.json')) {
+            filesys.readFile('db/Answers.json', function (err, data) {
+                var answers_json = JSON.parse(data);
+                let answer_body = answers_json[ID];
+                answer_body.Score = answer_body.Score + 1;
+                answers_json[ID] = answer_body;
+                filesys.writeFile('db/Answers.json', JSON.stringify(answers_json), function(err){
+                    if (err) throw err;
+                });
+            })
+        }
     }
 }
 

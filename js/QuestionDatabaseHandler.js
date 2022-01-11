@@ -9,6 +9,19 @@ module.exports = {
     },
     getQuestionWithID: function(ID) {
         return findQuestionWithID(ID);
+    },
+    increaseScoreOfQuestion(ID) {
+        if(filesys.existsSync('db/Questions.json')) {
+            filesys.readFile('db/Questions.json', function (err, data) {
+                var questions_json = JSON.parse(data);
+                let question_body = questions_json[ID];
+                question_body.Score = question_body.Score + 1;
+                questions_json[ID] = question_body;
+                filesys.writeFile('db/Questions.json', JSON.stringify(questions_json), function(err){
+                    if (err) throw err;
+                });
+            })
+        }
     }
 }
 

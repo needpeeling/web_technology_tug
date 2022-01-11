@@ -176,12 +176,12 @@ hr {
     height: 100px;
     background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
     cursor: pointer;
-    transition: background-position 1s steps(28);
+    transition: background-position 500ms steps(28);
     transition-duration: 0s;
 }
 
 .heart.is-active {
-    transition-duration: 1s;
+    transition-duration: 500ms;
     background-position: -2800px 0;
 }
 
