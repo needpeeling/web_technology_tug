@@ -74,6 +74,7 @@ app.get('/question*', (req, res) => {
         data = qcHandler.handleQuestionContent(data, question, activeQuestion_id, user_logged_in);
         data = qcHandler.handleAnswerContent(data, question, activeQuestion_id, user_logged_in);
         data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        data = qcHandler.handleRelatedContent(data);
         if(user_logged_in) {
             data = data.replace(/disabled/gi,"");
             data = data.replace(/Log In to Unlock!/gi,"Submit Answer");

@@ -1,5 +1,6 @@
 const lrHandler = require('./LoginRegisterHandler')
 const aDbHandler = require("./AnswerDatabaseHandler");
+const qDbHandler = require("./QuestionDatabaseHandler");
 
 module.exports = {
     handleQuestionContent: function (data, question, questionID, logged_in) {
@@ -25,6 +26,24 @@ module.exports = {
             iterator++;
         }
         data = data.replace(/<table class="answer_table"><\/table>/gi, "<table class=\"answer_table\">" + entries + "</table>");
+        return data;
+    },
+    handleRelatedContent: function (data) {
+        let result = qDbHandler.getBestFittingW2VQuestions();
+        if(result === undefined) {
+            result = qDbHandler.getHighestLikedQuestions();
+        }
+        let iterator = 0;
+        let entries = "";
+        data = data.replace(/<h3>Related<\/h3>\r\n            <ul>[\S\s.]*?<\/ul>/gi, "<h3>Related</h3><ul></ul>");
+        while(iterator < Object.keys(result).length && iterator < 3) {
+            if(result[iterator] !== undefined) {
+                let entry = "<li><a href=\"/question" + Object.keys(result[iterator])[0] + "\">" + result[iterator][Object.keys((result[iterator]))].Title + "</a></li>";
+                entries = entries + entry;
+            }
+            iterator++;
+        }
+        data = data.replace(/<h3>Related<\/h3><ul><\/ul>/gi, "<h3>Related</h3><ul>" + entries + "</ul>");
         return data;
     }
 }
