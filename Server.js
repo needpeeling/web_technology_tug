@@ -265,6 +265,30 @@ app.post('/question*', (req, res) => {
     }
 })
 
+app.post('/*', (req, res) => {
+    let data = filesys.readFileSync(__dirname + '/404.html').toString();
+    let skip = false;
+    if(helpF.handleSearch(req, true)) {
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+        skip = true;
+    } else if(req.body.logout !== undefined) {
+        user_logged_in = false;
+        helpF.resetUserID();
+    } else {}
+    if(!skip) {
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+    }
+})
+
 function handleQuestionPost(req, res) {
     activeQuestion_id = req.url.replace("/question","");
     let question = qDbHandler.getQuestionWithID(activeQuestion_id);
@@ -272,8 +296,10 @@ function handleQuestionPost(req, res) {
     data = qcHandler.handleQuestionContent(data, question, activeQuestion_id, user_logged_in);
     data = qcHandler.handleAnswerContent(data, question, activeQuestion_id, user_logged_in);
     data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+    data = qcHandler.handleRelatedContent(data);
     if(user_logged_in) {
-        data = data.replace(/disabled>Log In to Unlock!/gi,">Submit Answer");
+        data = data.replace(/disabled/gi,"");
+        data = data.replace(/Log In to Unlock!/gi,"Submit Answer");
     }
     res.setHeader("content-type", "text/html");
     res.send(data);
