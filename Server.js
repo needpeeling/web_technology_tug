@@ -4,12 +4,14 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const bodyParser = require('body-parser')
-const helpF      = require('./js/HelperFunctions');
-const icHandler  = require('./js/IndexContentHandler');
-const qcHandler  = require('./js/QuestionContentHandler');
-const qDbHandler = require('./js/QuestionDatabaseHandler');
-const filesys    = require('fs');
+const bodyParser  = require('body-parser')
+const helpF       = require('./js/HelperFunctions');
+const icHandler   = require('./js/IndexContentHandler');
+const qcHandler   = require('./js/QuestionContentHandler');
+const qDbHandler  = require('./js/QuestionDatabaseHandler');
+const filesys     = require('fs');
+const {promisify} = require('util');
+const sleep       = promisify(setTimeout);
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -139,7 +141,16 @@ app.post('/new.html', (req, res) => {
 
 app.post('/question*', (req, res) => {
     if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleAnswer(req, false, activeQuestion_id)) {}
+    else if(helpF.handleAnswer(req, false, activeQuestion_id)) {
+        sleep(100).then(() => {
+            handleQuestionPost(req, res);
+        })
+    } else {
+        handleQuestionPost(req, res);
+    }
+})
+
+function handleQuestionPost(req, res) {
     activeQuestion_id = req.url.replace("/question","");
     let question = qDbHandler.getQuestionWithID(activeQuestion_id);
     let data = filesys.readFileSync(__dirname + '/question.html').toString();
@@ -150,7 +161,7 @@ app.post('/question*', (req, res) => {
     }
     res.setHeader("content-type", "text/html");
     res.send(data);
-})
+}
 
 // #####################################################################################################################
 // ####                            Starting Server                                                                  ####
