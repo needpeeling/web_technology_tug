@@ -113,20 +113,38 @@ app.post(['/', '/index*'], (req, res) => {
 })
 
 app.post('/about.html', (req, res) => {
-    if(helpF.handleSearch(req, true)) {}
-    else if(req.body.logout !== undefined) {
+    let skip = false;
+    if(helpF.handleSearch(req, true)) {
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+        skip = true;
+    } else if(req.body.logout !== undefined) {
         user_logged_in = false;
         helpF.resetUserID();
     }
-    let data = filesys.readFileSync(__dirname + '/about.html').toString();
-    data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
-    res.setHeader("content-type", "text/html");
-    res.send(data);
+    if(!skip) {
+        let data = filesys.readFileSync(__dirname + '/about.html').toString();
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+    }
 })
 
 app.post('/login.html', (req, res) => {
-    if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleLogin(req, true)) {
+    if(helpF.handleSearch(req, true)) {
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+    } else if(helpF.handleLogin(req, true)) {
         let data = filesys.readFileSync(__dirname + '/index.html').toString();
         data = icHandler.handleMostPopularQuestions(data);
         user_logged_in = true;
@@ -151,8 +169,15 @@ app.post('/login.html', (req, res) => {
 })
 
 app.post('/register.html', (req, res) => {
-    if(helpF.handleSearch(req, true)) {}
-    else if(req.body.logout !== undefined) {
+    if(helpF.handleSearch(req, true)) {
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+    } else if(req.body.logout !== undefined) {
         user_logged_in = false;
         helpF.resetUserID();
         let data = filesys.readFileSync(__dirname + '/register.html').toString();
@@ -185,8 +210,16 @@ app.post('/register.html', (req, res) => {
 
 app.post('/new.html', (req, res) => {
     let skip = false;
-    if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleQuestion(req, true)) {}
+    if(helpF.handleSearch(req, true)) {
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+        skip = true;
+    } else if(helpF.handleQuestion(req, true)) {}
     else if(req.body.logout !== undefined) {
         user_logged_in = false;
         helpF.resetUserID();
@@ -206,8 +239,15 @@ app.post('/new.html', (req, res) => {
 })
 
 app.post('/question*', (req, res) => {
-    if(helpF.handleSearch(req, true)) {}
-    else if(helpF.handleAnswer(req, true, activeQuestion_id)) {
+    if(helpF.handleSearch(req, true)) {
+        let data = filesys.readFileSync(__dirname + '/index.html').toString();
+        data = icHandler.enableSearchResults(data);
+        data = icHandler.handleBestSuitingW2VQuestions(data, req.body.search2);
+        data = icHandler.handleMostPopularQuestions(data);
+        data = icHandler.handleLoginHeader(data,user_logged_in,helpF.getLoggedInUserID());
+        res.setHeader("content-type", "text/html");
+        res.send(data);
+    } else if(helpF.handleAnswer(req, true, activeQuestion_id)) {
         sleep(100).then(() => {
             handleQuestionPost(req, res);
         })
