@@ -3,8 +3,8 @@ const qDbHandler = require('./QuestionDatabaseHandler');
 const lrHandler  = require('./LoginRegisterHandler');
 
 module.exports = {
-    handleMostPopularQuestions: function (data) {
-        let result = qDbHandler.getHighesLikedQuestions();
+    handleMostPopularQuestions: function (data, questions_db) {
+        let result = qDbHandler.getHighestLikedQuestions(questions_db);
         let iterator = 0;
         let entries = "";
         data = data.replace(/<h3>Most popular Questions<\/h3>[\S\s.]*<\/table>/gi, "<h3>Most popular Questions</h3></table>");

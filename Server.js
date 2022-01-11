@@ -16,7 +16,6 @@ const sleep       = promisify(setTimeout);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-
 let activeQuestion_id = -1;
 let user_logged_in = false;
 

@@ -4,7 +4,7 @@ module.exports = {
     handleNewQuestion: function (questionTitle, questionDescription, user_id) {
         newQuestion(questionTitle, questionDescription, user_id);
     },
-    getHighesLikedQuestions: function() {
+    getHighestLikedQuestions: function() {
         return findAmountAnswersWithHighestLikes(10);
     },
     getQuestionWithID: function(ID) {
@@ -91,21 +91,21 @@ function findAmountAnswersWithHighestLikes(amount) {
         let result = [];
         let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
         let iterator = 0;
-        while(iterator < Object.keys(questions_json).length) {
-            result_obj.push(questions_json[iterator].Score);
+        while(iterator < Object.keys(questions_json).length && iterator < 100) { // Only look at first 100 entries
+            if(questions_json[iterator] !== undefined) {
+                result_obj.push({[iterator]:questions_json[iterator].Score});
+            }
             iterator++;
         }
-        result_obj = result_obj.sort(function(a,b){return b-a})
+        result_obj = result_obj.sort(function(a,b){return b[Object.keys(b)]-a[Object.keys(a)]})
 
         iterator = 0;
         let res = undefined;
         while(iterator < amount) {
-            res = findQuestionWithScore(result_obj[iterator],0);
-            while(contains(result,res)) {
-                res = findQuestionWithScore(result_obj[iterator], parseInt(Object.keys(res))+1)
+            if(result_obj[iterator] !== undefined) {
+                res = {[iterator]:questions_json[Object.keys(result_obj[iterator])[0]]};
+                result.push(res);
             }
-
-            result.push(res);
             iterator++;
         }
 
@@ -132,12 +132,12 @@ function contains(arr, entry) {
     return false;
 }
 
-function findQuestionWithScore(score, start) {
-    if(filesys.existsSync('db/Questions.json')) {
-        let questions_json = JSON.parse(filesys.readFileSync('db/Questions.json'));
+function findQuestionWithScore(score, start, questions_file) {
+    if(filesys.existsSync('db/Questions.json') && score !== undefined) {
+        let questions_json = questions_file;//JSON.parse(filesys.readFileSync('db/Questions.json'));
         let iterator = start;
         while(iterator < Object.keys(questions_json).length) {
-            if(questions_json[iterator].Score === score) {
+            if(questions_json[iterator] !== undefined && questions_json[iterator].Score === score && iterator < 50) {
                 return {[iterator]: questions_json[iterator]};
             }
             iterator++;
@@ -156,7 +156,7 @@ function findQuestionWithID(id) {
 
 // Usage: findAllAnswersWithHighestLikes()
 function findAllAnswersWithHighestLikes() {
-    findAmountAnswersWithHighestLikes(1000)
+    findAmountAnswersWithHighestLikes(500)
 }
 
 // Usage: findAmountAnswersWithHighestW2VValue(10)
