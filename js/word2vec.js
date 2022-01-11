@@ -1,4 +1,5 @@
 const fs = require('fs');
+const w2v = require('word2vec');
 
 // processes a string for the corpus
 function preprocess(originalString) {
@@ -32,3 +33,6 @@ function createCorpus(inputFile, outputFile) {
         });
     })
 }
+
+createCorpus("./db/Questions.json", './db/corpus.txt');
+w2v.word2vec("./db/corpus.txt", "./db/word_vectors.txt");
